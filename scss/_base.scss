@@ -1,0 +1,74 @@
+///VARIABLES
+
+//colors
+$yellow: #e6c941;
+$blue: #5fd3eb;
+$red: #d66868;
+//gradient
+
+//font
+
+//shadows
+
+//RESPONSIVE BREAKPOSNTS
+
+$bp-super-large: 100em; //1600px
+$bp-largest: 62.5em; //1000px
+$bp-large: 50em; //800px
+$bp-medium: 34.375em; //550px
+$bp-small: 25em; //400px
+
+$bp-flex: 65.875em;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    &:link,
+    &:visited {
+        color: initial;
+        text-decoration: none;
+    }
+}
+
+.menu-html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+
+    box-sizing: border-box;
+    font-size: 62.5%;
+
+    @media only screen and (max-width: $bp-large) {
+        font-size: 50%;
+    }
+}
+
+.my-levels {
+    box-sizing: border-box;
+    font-size: 62.5%;
+
+    @media only screen and (max-width: $bp-super-large) {
+        font-size: 50%;
+    }
+}
+
+.menu-body {
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.levels-body {
+    width: 100%;
+    height: 100vh;
+    font-family: "Manrope", sans-serif;
+}
