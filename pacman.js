@@ -6,22 +6,22 @@ UKAŁD KODU
 
 
 2.KLASY
-    -> function Specialpoint(x,y)
-    -> function Wall(x,y,width,height)
-    -> function Food(x,y)
-    -> function PacMan()
+	-> function Specialpoint(x,y)
+	-> function Wall(x,y,width,height)
+	-> function Food(x,y)
+	-> function PacMan()
 
 3.FUNKCJE GŁOWNE
-    -> function preload()
-    -> function setup()
-    -> function draw()
+	-> function preload()
+	-> function setup()
+	-> function draw()
 
 4.FUNKCJE POBOCZNE
-    -> function keyPressed()
-    -> function checkSpecialPoints()
-    -> function foodCreator()
-    -> function specialPointCreator()
-    -> function wallCreator()
+	-> function keyPressed()
+	-> function checkSpecialPoints()
+	-> function foodCreator()
+	-> function specialPointCreator()
+	-> function wallCreator()
 
 
 */
@@ -68,7 +68,7 @@ var oldposy; // stary koordynat y wykorzystane aby pacmam nie stawal tylko szedl
 //--------ghost1----------
 
 var tab_specialpoints_for_ghost_1 = [];
-var ghost_images = [ [], [], [], [] ];
+var ghost_images = [[], [], [], []];
 var ghost_alt_img;
 var ifScared = false;
 var counter = 1;
@@ -149,10 +149,10 @@ function sound(src) {
 	this.sound.style.display = 'none';
 	this.sound.volume = 0.1;
 	document.body.appendChild(this.sound);
-	this.play = function() {
+	this.play = function () {
 		this.sound.play();
 	};
-	this.stop = function() {
+	this.stop = function () {
 		this.sound.pause();
 	};
 }
@@ -178,7 +178,7 @@ function Wall(x, y, width, height, lu, ru, rd, ld) {
 	this.width = width * scl;
 	this.height = height * scl;
 
-	this.drawWall = function() {
+	this.drawWall = function () {
 		noStroke();
 		//strokeWeight(1);
 		//stroke('#FFF');
@@ -192,7 +192,7 @@ function Food(x, y) {
 	this.x = x * scl;
 	this.y = y * scl;
 
-	this.drawFood = function() {
+	this.drawFood = function () {
 		//fill(66, 110, 244);
 		//rect(this.x, this.y);
 		image(foodImage, this.x, this.y, scl, scl);
@@ -203,7 +203,7 @@ function BigFood(x, y) {
 	this.x = x * scl;
 	this.y = y * scl;
 
-	this.drawBigFood = function() {
+	this.drawBigFood = function () {
 		//fill(66, 110, 244);
 		//rect(this.x, this.y);
 		image(bigFoodImage, this.x, this.y, scl, scl);
@@ -214,14 +214,14 @@ function PacMan() {
 	// kalsa pacman
 	this.Heart = '<img src="Images/heart.png" width="100" >';
 
-	this.begin = function() {
+	this.begin = function () {
 		this.x = pacmanInfo[0] * scl;
 		this.y = pacmanInfo[1] * scl;
 		this.xspeed = pacmanInfo[2];
 		this.yspeed = pacmanInfo[3];
 	};
 
-	this.update = function() // updejtuje pozycje pacmana
+	this.update = function () // updejtuje pozycje pacmana
 	{
 		this.x = this.x + this.xspeed * scl * factor_speed;
 		this.y = this.y + this.yspeed * scl * factor_speed;
@@ -243,7 +243,7 @@ function PacMan() {
 		this.jump();
 	};
 
-	this.show = function() // rysowanie pacmana
+	this.show = function () // rysowanie pacmana
 	{
 		//fill(255, 204, 0);
 		//image(pacman, this.x, this.y, scl, scl);
@@ -268,7 +268,7 @@ function PacMan() {
 		if (stan == 9) stan -= 9;
 	};
 
-	this.eat = function(pos) {
+	this.eat = function (pos) {
 		if (this.x == pos.x && this.y == pos.y) {
 			Score += 10;
 			endCondicion++;
@@ -278,7 +278,7 @@ function PacMan() {
 		}
 	};
 
-	this.eatBig = function(pos) {
+	this.eatBig = function (pos) {
 		if (this.x == pos.x && this.y == pos.y) {
 			for (let i = 0; i < ghosts.length; i++) {
 				ghosts[i].boo();
@@ -290,7 +290,7 @@ function PacMan() {
 		return 0;
 	};
 
-	this.dir = function(
+	this.dir = function (
 		x,
 		y // zmienia kierunek poruszania sie pacmana -  w zaleznosci od wcisnietej strzalki
 	) {
@@ -300,7 +300,7 @@ function PacMan() {
 		this.yspeed = y;
 	};
 
-	this.death = function(ghost) {
+	this.death = function (ghost) {
 		for (var i = 1; i < 5; i++) {
 			if (
 				(this.x == ghost.x && this.y == ghost.y) ||
@@ -320,7 +320,7 @@ function PacMan() {
 		}
 	};
 
-	this.colision = function(pos) {
+	this.colision = function (pos) {
 		if (
 			this.x + (scl - scl * factor_speed) >= pos.x &&
 			this.x - (scl - scl * factor_speed) <= pos.x + pos.width - scl &&
@@ -349,7 +349,7 @@ function PacMan() {
 		return 0;
 	};
 
-	this.jump = function() {
+	this.jump = function () {
 		if (currentDirection == 4 && this.x == 0) {
 			this.x = 27 * scl;
 		} else if (currentDirection == 2 && this.x == 27 * scl) {
@@ -375,7 +375,7 @@ function Ghost(start_x, start_y, xs, type) {
 	this.ghostDeath = 0;
 	this.ownCount = 0;
 
-	this.begin = function(start_x, start_y, xs, type) {
+	this.begin = function (start_x, start_y, xs, type) {
 		this.x = start_x * scl; //, (x,y)- pozycja stratowa
 		this.y = start_y * scl;
 		this.xspeed = xs; // kierunek  poruszania
@@ -393,7 +393,7 @@ function Ghost(start_x, start_y, xs, type) {
 		this.ownCount = 0;
 	};
 
-	this.eyeRoll = function() {
+	this.eyeRoll = function () {
 		if (this.yspeed == -1) {
 			return 0;
 		} else if (this.xspeed == 1) {
@@ -405,7 +405,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.update = function() // updejtuje pozycje pacmana
+	this.update = function () // updejtuje pozycje pacmana
 	{
 		if (this.x == 13 * scl && this.start == 0) {
 			this.start = 1;
@@ -441,7 +441,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.die = function() {
+	this.die = function () {
 		if (
 			(p.x == this.x && p.y == this.y) ||
 			(p.x == this.x && p.y == this.y - scl * factor_speed) ||
@@ -467,9 +467,9 @@ function Ghost(start_x, start_y, xs, type) {
 				p.begin();
 
 				/*ghosts[0].begin(11,13,1,1);
-                ghosts[1].begin(16,13,-1,2);
-                ghosts[2].begin(11,15,1,3);
-                ghosts[3].begin(16,15,-1,4);*/
+				ghosts[1].begin(16,13,-1,2);
+				ghosts[2].begin(11,15,1,3);
+				ghosts[3].begin(16,15,-1,4);*/
 
 				for (let i = 0; i < ghosts.length; i++) {
 					ghosts[i].begin(ghostsInfo[i][0], ghostsInfo[i][1], ghostsInfo[i][2], ghostsInfo[i][3]);
@@ -484,7 +484,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.boo = function() {
+	this.boo = function () {
 		this.oldFactorSpeed = 0.2;
 		this.ownFactorSpeed = 0.1;
 		while ((this.x % scl) * this.ownFactorSpeed != 0 && this.ownIfScared != true) {
@@ -501,7 +501,7 @@ function Ghost(start_x, start_y, xs, type) {
 		this.ownIfScared = true;
 	};
 
-	this.notScared = function() {
+	this.notScared = function () {
 		this.oldFactorSpeed = this.ownFactorSpeed;
 		this.ownIfScared = false;
 		this.ownFactorSpeed = 0.2;
@@ -517,7 +517,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.returnToStart = function() {
+	this.returnToStart = function () {
 		this.x = start_x * scl; //, (x,y)- pozycja stratowa
 		this.y = start_y * scl;
 		this.start = 0;
@@ -527,7 +527,7 @@ function Ghost(start_x, start_y, xs, type) {
 		this.yspeed = 0;
 	};
 
-	this.show = function(
+	this.show = function (
 		photo // rysowanie pacmana
 	) {
 		if (ifScared && this.ownIfScared) photo = ghost_alt_img;
@@ -538,11 +538,11 @@ function Ghost(start_x, start_y, xs, type) {
 		image(photo, this.x, this.y, scl, scl);
 	};
 
-	this.generation_next_dir = function(index) {
+	this.generation_next_dir = function (index) {
 		var direction_x;
 		var direction_y;
-		var rand_x = [ 4, 2 ];
-		var rand_y = [ 3, 1 ];
+		var rand_x = [4, 2];
+		var rand_y = [3, 1];
 
 		if (this.ownIfScared == true) {
 			if (p.x > this.x) {
@@ -634,7 +634,7 @@ function Ghost(start_x, start_y, xs, type) {
 		//var czy_koniec=0;
 		//var next_dir = random(rand);
 
-		var losuj_kolejnosc = [ 1, 2, 3, 4 ];
+		var losuj_kolejnosc = [1, 2, 3, 4];
 		var kol = random(losuj_kolejnosc);
 
 		if (kol == 1) {
@@ -653,7 +653,7 @@ function Ghost(start_x, start_y, xs, type) {
 					return;
 				}
 			} else {
-				var rand = [ 1, 2, 3, 4 ];
+				var rand = [1, 2, 3, 4];
 				while (1) {
 					var next_dir = random(rand);
 					if (next_dir == 1) {
@@ -699,7 +699,7 @@ function Ghost(start_x, start_y, xs, type) {
 					return;
 				}
 			} else {
-				var rand = [ 1, 2, 3, 4 ];
+				var rand = [1, 2, 3, 4];
 				while (1) {
 					var next_dir = random(rand);
 					if (next_dir == 1) {
@@ -745,7 +745,7 @@ function Ghost(start_x, start_y, xs, type) {
 				this.dir(-1, 0);
 				return;
 			} else {
-				var rand = [ 1, 2, 3, 4 ];
+				var rand = [1, 2, 3, 4];
 				while (1) {
 					var next_dir = random(rand);
 					if (next_dir == 1) {
@@ -791,7 +791,7 @@ function Ghost(start_x, start_y, xs, type) {
 				this.dir(-1, 0);
 				return;
 			} else {
-				var rand = [ 1, 2, 3, 4 ];
+				var rand = [1, 2, 3, 4];
 				while (1) {
 					var next_dir = random(rand);
 					if (next_dir == 1) {
@@ -823,7 +823,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.jump = function() {
+	this.jump = function () {
 		if (this.x == 0) {
 			this.x = 27 * scl;
 		} else if (this.x == 27 * scl) {
@@ -831,7 +831,7 @@ function Ghost(start_x, start_y, xs, type) {
 		}
 	};
 
-	this.dir = function(
+	this.dir = function (
 		x,
 		y // zmienia kierunek poruszania sie pacmana -  w zaleznosci od wcisnietej strzalki
 	) {
@@ -841,7 +841,7 @@ function Ghost(start_x, start_y, xs, type) {
 		this.yspeed = y;
 	};
 
-	this.colision = function(pos) {
+	this.colision = function (pos) {
 		if (
 			this.x + (scl - scl * this.ownFactorSpeed) >= pos.x &&
 			this.x - (scl - scl * this.ownFactorSpeed) <= pos.x + pos.width - scl &&
@@ -992,13 +992,13 @@ function draw() {
 	}
 	background(0, 0, 0);
 	/*if((counter >=170)&&(counter%2==0))
-    {
+	{
 		for(let i=0;i<ghosts.length;i++)
 			ghosts[i].show(ghost_alt_img2);
-        //background(170, 170, 170) //zmiana koloru tla kanvasa       
-    } else {
-        background(0,0,0); //zmiana koloru tla kanvasa
-    }*/
+		//background(170, 170, 170) //zmiana koloru tla kanvasa       
+	} else {
+		background(0,0,0); //zmiana koloru tla kanvasa
+	}*/
 
 	for (let i = 0; i < wall.length; i++) {
 		wall[i].drawWall();
@@ -1085,13 +1085,13 @@ function keyPressed() {
 arrows[0].addEventListener('click', () => {
 	turn('up');
 });
-arrows[1].addEventListener('click', function(e) {
+arrows[1].addEventListener('click', function (e) {
 	turn('left');
 });
-arrows[2].addEventListener('click', function(e) {
+arrows[2].addEventListener('click', function (e) {
 	turn('down');
 });
-arrows[3].addEventListener('click', function(e) {
+arrows[3].addEventListener('click', function (e) {
 	turn('right');
 });
 
